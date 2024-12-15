@@ -1,0 +1,5 @@
+.git
+tmp/
+logs/
+*.log
+permanent_storage/

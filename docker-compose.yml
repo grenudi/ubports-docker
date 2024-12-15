@@ -1,15 +1,26 @@
 version: '3'
 services:
-  android-setup:
+  ubports-docki:
+    image: ubports-docki:latest
+    container_name: ubports-docker
     build:
       context: .
       args:
         GIT_USER_NAME: ${GIT_USER_NAME}
         GIT_USER_EMAIL: ${GIT_USER_EMAIL}
         REPO_URL: ${REPO_URL}
-    container_name: android-setup
     privileged: true
     devices:
       - "/dev/bus/usb:/dev/bus/usb"
     stdin_open: true
     tty: true
+    environment:
+      - USE_CCACHE=1
+      - CCACHE_DIR=/home/ubpuser/.ccache
+      - CCACHE_SIZE=50G
+    volumes:
+      - ./ccache:/home/ubpuser/.ccache
+      - ./builds:/home/ubpuser/ubports-builds
+      - ./permanent_storage/ubports:/home/ubpuser/ubports 
+      - ./permanent_storage/ubports-builds:/home/ubpuser/ubports-builds
+    mem_limit: 4g
