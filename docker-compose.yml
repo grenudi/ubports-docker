@@ -1,0 +1,15 @@
+version: '3'
+services:
+  android-setup:
+    build:
+      context: .
+      args:
+        GIT_USER_NAME: ${GIT_USER_NAME}
+        GIT_USER_EMAIL: ${GIT_USER_EMAIL}
+        REPO_URL: ${REPO_URL}
+    container_name: android-setup
+    privileged: true
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
+    stdin_open: true
+    tty: true
